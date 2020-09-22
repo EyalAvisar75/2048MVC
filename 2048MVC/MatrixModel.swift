@@ -10,34 +10,36 @@ import Foundation
 
 var squaresContent:[Int] = [] //Array(repeating: 0, count: 15)
 var squaresContentHistory = ""
+var changedCells = [Int]()
+var allCells = [CollectionViewCell]()
 var pointsToAdd = 0
 
 func shiftContentLeft()  {
     closeSquareContentGapsLeft()
     sumPointsLeft()
     closeSquareContentGapsLeft()
-    print("swipe left")
+//    print("swipe left")
 }
 
 func shiftContentRight() {
     closeSquareContentGapsRight()
     sumPointsRight()
     closeSquareContentGapsRight()
-    print("swipe right")
+//    print("swipe right")
 }
 
 func shiftContentUp() {
     closeSquareContentGapsUp()
     sumPointsUp()
     closeSquareContentGapsUp()
-    print("swipe up")
+//    print("swipe up")
 }
 
 func shiftContentDown() {
     closeSquareContentGapsDown()
     sumPointsDown()
     closeSquareContentGapsDown()
-    print("swipe down")
+//    print("swipe down")
 }
 
 func sumPointsRight() {
@@ -49,11 +51,12 @@ func sumPointsRight() {
             squaresContent[index - 1] = 0
             
             if squaresContent[index] > 0 {
+                changedCells.append(index)
                 add(points: squaresContent[index])
             }
             
             index -= 2
-            print(squaresContent)
+//            print(squaresContent)
             continue
         }
         index -= 1
@@ -83,11 +86,12 @@ func sumPointsLeft() {
             squaresContent[index] = 0
             
             if squaresContent[index + 1] > 0 {
+                changedCells.append(index + 1)
                 add(points: squaresContent[index])
             }
             
             index += 2
-            print(squaresContent)
+//            print(squaresContent)
             continue
         }
         index += 1
@@ -113,9 +117,10 @@ func sumPointsDown() {
         if squaresContent[index - 4] == squaresContent[index] {
             squaresContent[index] *= 2
             squaresContent[index - 4] = 0
-            print("\(squaresContent), \(index)")
+//            print("\(squaresContent), \(index)")
             
             if squaresContent[index] > 0 {
+                changedCells.append(index)
                 add(points: squaresContent[index])
 //                accumulatePoints(with: squaresContent[index])
             }
@@ -135,7 +140,7 @@ func closeSquareContentGapsDown() {
         if squaresContent[index - 4] != 0 && squaresContent[index] == 0{
             squaresContent[index] = squaresContent[index - 4]
             squaresContent[index - 4] = 0
-            print(squaresContent)
+//            print(squaresContent)
             index = 15
             continue
         }
@@ -154,10 +159,10 @@ func sumPointsUp() {
         if squaresContent[index + 4] == squaresContent[index] {
             squaresContent[index] *= 2
             squaresContent[index + 4] = 0
-            print("\(squaresContent), \(index)")
+//            print("\(squaresContent), \(index)")
             if squaresContent[index] > 0 {
+                changedCells.append(index)
                 add(points: squaresContent[index])
-//                accumulatePoints(with: squaresContent[index])
             }
         }
         
@@ -175,7 +180,7 @@ func closeSquareContentGapsUp() {
         if squaresContent[index] == 0 && squaresContent[index + 4] != 0{
             squaresContent[index] = squaresContent[index + 4]
             squaresContent[index + 4] = 0
-            print(squaresContent)
+//            print(squaresContent)
             index = 0
             continue
         }
