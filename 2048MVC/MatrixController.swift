@@ -29,20 +29,17 @@ extension MatrixController: UICollectionViewDelegateFlowLayout, UICollectionView
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         
-        animateShift(cell: cell)
-        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
-            cell.cellImage.transform = .identity
-        })
+        print("cell number \(cell.cellNumber) cell row \(indexPath.row)")
+
         cell.setup(cellNumber: indexPath.row)
-        
+        animateShift(cell: cell)
+
         if squaresContent[indexPath.row] != 0 {
             cell.pointsLabel.text = String(squaresContent[indexPath.row])
         }
         
         cell.paint()
         cell.cellImage.backgroundColor = cell.cellColor
-//        cell.backgroundColor = cell.cellColor
-        
         
         if cell.backgroundColor != cell.pointsLabel.backgroundColor {
             cell.pointsLabel.backgroundColor = cell.backgroundColor
@@ -153,21 +150,52 @@ class MatrixController: UIViewController, UICollectionViewDelegate {
 
     func animateShift(cell:CollectionViewCell) {
         
-        UIView.transition(with: numbersCollection, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: nil)
+//        UIView.transition(with: numbersCollection, duration: 0.3, options: .transitionCrossDissolve, animations: {}, completion: nil)
 
         var cellsToAnimate = [CollectionViewCell]()
 
+        if direction == .Down {
+            UIView.transition(with: cell.pointsLabel, duration: 0.25, options: .transitionFlipFromTop, animations: {
+            },
+            completion: nil)
+        }
+        else if direction == .Up {
+            UIView.transition(with: cell.pointsLabel, duration: 0.25, options: .transitionFlipFromBottom, animations: {
+            },
+            completion: nil)
+        }
+        else if direction == .Left {
+            UIView.transition(with: cell.pointsLabel, duration: 0.25, options: .transitionFlipFromRight, animations: {
+            },
+            completion: nil)
+        }
+        else if direction == .Right {
+            UIView.transition(with: cell.pointsLabel, duration: 0.25, options: .transitionFlipFromLeft, animations: {
+            },
+            completion: nil)
+        }
+        
         if changedCells.count != 0 {
             for index in changedCells {
-                cellsToAnimate.append(allCells[index])
+                for member in allCells {
+                    if member.cellNumber == index {
+                        cellsToAnimate.append(member)
+
+                    }
+                }
             }
         }
+        
+        print("cell number \(cell.cellNumber)")
+        print(cellsToAnimate)
         
         if cellsToAnimate.contains(cell) {
             UIView.animate(withDuration: 6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
                 cell.cellImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             })
-            
+            UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+                cell.cellImage.transform = .identity
+            })
             cellsToAnimate = []
         }
     }

@@ -24,7 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
         cellImage.image = image
         cellImage.alpha = 0.4
         cellImage.backgroundColor = cellColor
-        allCells.append(self)
+        allCells.insert(self)
         pointsLabel.text = ""
     }
     

@@ -7,11 +7,11 @@
 //
 
 import Foundation
-
-var squaresContent:[Int] = [] //Array(repeating: 0, count: 15)
+//in a new project - work on empty collectionview and try to animate cell movement
+var squaresContent:[Int] = [] //Array(repeating: 0, count: 15) maybe i should fill it as 2 dimensional array?
 var squaresContentHistory = ""
 var changedCells = [Int]()
-var allCells = [CollectionViewCell]()
+var allCells:Set<CollectionViewCell> = []
 var pointsToAdd = 0
 
 func shiftContentLeft()  {
@@ -72,6 +72,7 @@ func closeSquareContentGapsRight() {
             index = 0
             continue
         }
+        
         index += 1
     }
 
