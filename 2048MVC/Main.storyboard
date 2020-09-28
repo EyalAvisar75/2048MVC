@@ -94,6 +94,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="endGame" destination="jNe-fw-Vul" id="FpM-Ej-D0t"/>
                         <outlet property="numbersCollection" destination="31q-aF-czA" id="4AW-sG-feI"/>
                         <outlet property="pointsLabel" destination="IGk-ee-PUt" id="DdG-Lx-wf6"/>
                     </connections>

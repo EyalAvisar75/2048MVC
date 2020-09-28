@@ -24,6 +24,21 @@ extension MatrixController: UICollectionViewDelegateFlowLayout, UICollectionView
             if squaresContentHistory != squaresContent.description {
                 getNewTileContent()
             }
+            
+            if checkGameEnded()
+                {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
+                    
+                    let alert = UIAlertController(title: "Game Ended!", message: "", preferredStyle: .alert)
+                    let endAction = UIAlertAction(title: "Continue", style: .default) { (sender:UIAlertAction) in
+                        self.restartGame(self.endGame!)
+                    }
+                    alert.addAction(endAction)
+                    present(alert, animated: true)
+                    
+                    return cell
+                }
+            
 //            print(squaresContentHistory)
 //            print(squaresContent)
         }
@@ -50,6 +65,7 @@ extension MatrixController: UICollectionViewDelegateFlowLayout, UICollectionView
 
 class MatrixController: UIViewController, UICollectionViewDelegate {
 
+    @IBOutlet weak var endGame: UIButton!
     @IBOutlet weak var numbersCollection: UICollectionView!
     
     @IBOutlet weak var pointsLabel: UILabel!
@@ -206,6 +222,37 @@ class MatrixController: UIViewController, UICollectionViewDelegate {
             cellsToAnimate = []
         }
     }
+    
+    func checkGameEnded() -> Bool {
+        var index = 0
+            while index <= 11 {
+                if squaresContent[index + 4] == squaresContent[index] {
+//                    if squaresContent[index + 4] > 0 {
+//                        return false
+//                    }
+                    return false
+                }
+                
+                index += 4
+                if index > 11 && index != 15 {
+                    index -= 11
+                }
+            }
         
+        index = 0
+            
+            while index < 15 {
+                if index % 4 < 3 && squaresContent[index] ==  squaresContent[index + 1] {
+                    
+//                    if squaresContent[index + 1] > 0 {
+//                        return false
+//                    }
+                    return false
+                }
+                index += 1
+            }
+        
+        return true
+    }
 }
 
