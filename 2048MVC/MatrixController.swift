@@ -196,6 +196,13 @@ class MatrixController: UIViewController, UICollectionViewDelegate {
             UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
                 cell.cellImage.transform = .identity
             })
+            
+            for index in 0..<changedCells.count {
+                if changedCells[index]  == cell.cellNumber {
+                    changedCells.remove(at: index)
+                    break
+                }
+            }
             cellsToAnimate = []
         }
     }
