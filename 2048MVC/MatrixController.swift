@@ -194,9 +194,8 @@ class MatrixController: UIViewController, UICollectionViewDelegate {
         if changedCells.count != 0 {
             for index in changedCells {
                 for member in allCells {
-                    if member.cellNumber == index {
-                        cellsToAnimate.append(member)
-
+                    if member.cellNumber == index && squaresContent[index] > 2 {
+                        cellsToAnimate.append(member)   
                     }
                 }
             }
@@ -227,9 +226,6 @@ class MatrixController: UIViewController, UICollectionViewDelegate {
         var index = 0
             while index <= 11 {
                 if squaresContent[index + 4] == squaresContent[index] {
-//                    if squaresContent[index + 4] > 0 {
-//                        return false
-//                    }
                     return false
                 }
                 
@@ -243,10 +239,6 @@ class MatrixController: UIViewController, UICollectionViewDelegate {
             
             while index < 15 {
                 if index % 4 < 3 && squaresContent[index] ==  squaresContent[index + 1] {
-                    
-//                    if squaresContent[index + 1] > 0 {
-//                        return false
-//                    }
                     return false
                 }
                 index += 1
