@@ -18,28 +18,24 @@ func shiftContentLeft()  {
     closeSquareContentGapsLeft()
     sumPointsLeft()
     closeSquareContentGapsLeft()
-//    print("swipe left")
 }
 
 func shiftContentRight() {
     closeSquareContentGapsRight()
     sumPointsRight()
     closeSquareContentGapsRight()
-//    print("swipe right")
 }
 
 func shiftContentUp() {
     closeSquareContentGapsUp()
     sumPointsUp()
     closeSquareContentGapsUp()
-//    print("swipe up")
 }
 
 func shiftContentDown() {
     closeSquareContentGapsDown()
     sumPointsDown()
     closeSquareContentGapsDown()
-//    print("swipe down")
 }
 
 func sumPointsRight() {
@@ -56,7 +52,6 @@ func sumPointsRight() {
             }
             
             index -= 2
-//            print(squaresContent)
             continue
         }
         index -= 1
@@ -92,7 +87,6 @@ func sumPointsLeft() {
             }
             
             index += 2
-//            print(squaresContent)
             continue
         }
         index += 1
@@ -118,7 +112,6 @@ func sumPointsDown() {
         if squaresContent[index - 4] == squaresContent[index] {
             squaresContent[index] *= 2
             squaresContent[index - 4] = 0
-//            print("\(squaresContent), \(index)")
             
             if squaresContent[index] > 0 {
                 changedCells.append(index)
@@ -141,7 +134,6 @@ func closeSquareContentGapsDown() {
         if squaresContent[index - 4] != 0 && squaresContent[index] == 0{
             squaresContent[index] = squaresContent[index - 4]
             squaresContent[index - 4] = 0
-//            print(squaresContent)
             index = 15
             continue
         }
@@ -160,7 +152,6 @@ func sumPointsUp() {
         if squaresContent[index + 4] == squaresContent[index] {
             squaresContent[index] *= 2
             squaresContent[index + 4] = 0
-//            print("\(squaresContent), \(index)")
             if squaresContent[index] > 0 {
                 changedCells.append(index)
                 add(points: squaresContent[index])
@@ -181,7 +172,6 @@ func closeSquareContentGapsUp() {
         if squaresContent[index] == 0 && squaresContent[index + 4] != 0{
             squaresContent[index] = squaresContent[index + 4]
             squaresContent[index + 4] = 0
-//            print(squaresContent)
             index = 0
             continue
         }

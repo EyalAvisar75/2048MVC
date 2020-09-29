@@ -38,14 +38,9 @@ extension MatrixController: UICollectionViewDelegateFlowLayout, UICollectionView
                     
                     return cell
                 }
-            
-//            print(squaresContentHistory)
-//            print(squaresContent)
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         
-        print("cell number \(cell.cellNumber) cell row \(indexPath.row)")
-
         cell.setup(cellNumber: indexPath.row)
         animateShift(cell: cell)
 
@@ -200,9 +195,6 @@ class MatrixController: UIViewController, UICollectionViewDelegate {
                 }
             }
         }
-        
-        print("cell number \(cell.cellNumber)")
-        print(cellsToAnimate)
         
         if cellsToAnimate.contains(cell) {
             UIView.animate(withDuration: 6, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {

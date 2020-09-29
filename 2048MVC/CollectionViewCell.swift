@@ -13,10 +13,8 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet var cellImage: UIImageView!
     @IBOutlet weak var pointsLabel: UILabel!
     var cellNumber:Int?
-    var cellPoints:Int = 0
     var cellPointsHistory:Int = 0
     var cellColor:UIColor = .blue
-    
     
     func setup(cellNumber:Int) {
         self.cellNumber = cellNumber
@@ -29,29 +27,32 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     func paint() {
-        switch pointsLabel.text {
-            case "2":
+        
+        let points = Int(pointsLabel.text!) ?? 0 % 4096
+        
+        switch points {
+            case 2:
+                cellColor = .green
+            case 4:
                 cellColor = .red
-            case "4":
-                cellColor = .green
-            case "8":
+            case 8:
+                cellColor = .yellow
+            case 16:
                 cellColor = .white
-            case "16":
-                cellColor = .gray
-            case "32":
-                cellColor = .orange
-            case "64":
-                cellColor = .green
-            case "128":
-                cellColor = .brown
-            case "256":
+            case 32:
                 cellColor = .magenta
-            case "512":
-                cellColor = .black
-            case "1024":
+            case 64:
+                cellColor = .orange
+            case 128:
+                cellColor = .cyan
+            case 256:
                 cellColor = .gray
-            case "2048":
+            case 512:
                 cellColor = .brown
+            case 1024:
+                cellColor = .lightGray
+            case 2048:
+                cellColor = .purple
             default:
                 cellColor = .blue
         }
